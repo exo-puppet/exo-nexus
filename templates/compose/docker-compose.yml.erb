@@ -1,0 +1,30 @@
+##################
+# File managed by puppet, don't edit
+##################
+version: '2'
+networks:
+  front:
+<% if scope['nexus::front_network'] != :undef -%>
+    external:
+      name: <%= scope['nexus::front_network'] %>
+<% end -%>
+  database:
+services:
+  nexus:
+    image: <%= scope['nexus::image'] %>:<%= scope['nexus::version'] %>
+    expose:
+      - 8081
+    environment:
+      - MAX_HEAP=<%= scope['nexus::heap'] %>
+    volumes:
+      - <%= scope['nexus::install_dir'] %>/conf/nexus.properties:/opt/nexus/conf/nexus.properties:ro
+      - <%= scope['nexus::data_dir'] %>:/sonatype-work
+      - <%= scope['nexus::log_dir'] %>:/sonatype-work/logs
+    networks:
+      front:
+        aliases:
+          - nexus
+    labels:
+<% scope['nexus::container_labels'].each do |label| -%>
+      - "<%= label %>"
+<% end -%>

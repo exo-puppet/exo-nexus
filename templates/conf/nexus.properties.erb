@@ -1,0 +1,24 @@
+# ###################################
+# This file is managed by puppet
+# PLEASE DON'T MODIFY BY HAND
+# ###################################
+
+# Sonatype Nexus
+# ==============
+# This is the most basic configuration of Nexus.
+
+# Jetty section
+application-port=8081
+application-host=0.0.0.0
+nexus-webapp=${bundleBasedir}/nexus
+nexus-webapp-context-path=/
+
+# Nexus section
+nexus-work=/sonatype-work
+runtime=${bundleBasedir}/nexus/WEB-INF
+
+# Branding
+branding.image.path=<%= scope['nexus::logo'] %>
+
+# http://central.sonatype.org/pages/central-sync-with-nexus-smart-proxy.html
+smartproxy.eventPublisher.defaultTtl=240m
