@@ -2,6 +2,7 @@ class nexus (
   $image              = 'sonatype/nexus',
   $version            = 'pro-2.13.0-01',
   $install_dir        = '/opt/nexus',
+  $manage_install_dir = 'true',
   $data_dir           = '/srv/nexus',
   $log_dir            = '/var/log/nexus',
   $account            = 200,
@@ -13,18 +14,24 @@ class nexus (
 ) {
   ########################
   ## Directories
-  ########################  
-  file { "${nexus::install_dir}" :
-    ensure    => directory,
-    owner     => "${account}",
-    group     => "${account}",
-    mode      => '644',
-  } ->
+  ########################
+  
+  if (manage_install_dir == true) {
+    file { "${nexus::install_dir}" :
+      ensure    => directory,
+      owner     => "${account}",
+      group     => "${account}",
+      mode      => '640',
+      require   => [File["${nexus::install_dir}"]],
+    }
+  }
+
   file { "${nexus::install_dir}/conf" :
     ensure    => directory,
     owner     => "${account}",
     group     => "${account}",
     mode      => '640',
+    require   => [File["${nexus::install_dir}"]],
   } ->
   file { "${nexus::data_dir}" :
     ensure    => directory,
@@ -48,6 +55,7 @@ class nexus (
     group     => 'root',
     mode      => '644',
     content     => template ('nexus/conf/nexus.properties.erb'),
+    require   => [File["${nexus::install_dir}"]],
   }
 
   ########################
@@ -59,6 +67,7 @@ class nexus (
     owner       => 'root',
     group       => 'root',
     mode        => '640',
+    require   => [File["${nexus::install_dir}"]],
   }
   
   ###########################
@@ -73,5 +82,4 @@ class nexus (
   }
 
   # TODO backup
-  # TODO rotation logs
 }
