@@ -9,6 +9,7 @@ class nexus (
   $logo_path          = "",
   $container_labels   = [],
   $heap               = '2g',
+  $smtp_network       = 'smtp',
 ) {
   ########################
   ## Directories

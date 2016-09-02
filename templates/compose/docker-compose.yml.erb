@@ -8,7 +8,11 @@ networks:
     external:
       name: <%= scope['nexus::front_network'] %>
 <% end -%>
-  database:
+  smtp:
+<% if scope['nexus::smtp_network'] != :undef -%>
+    external:
+      name: <%= scope['nexus::smtp_network'] %>
+<% end -%>
 services:
   nexus:
     image: <%= scope['nexus::image'] %>:<%= scope['nexus::version'] %>
@@ -24,6 +28,7 @@ services:
       front:
         aliases:
           - nexus
+      smtp:
     labels:
 <% scope['nexus::container_labels'].each do |label| -%>
       - "<%= label %>"
