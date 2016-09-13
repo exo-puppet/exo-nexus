@@ -29,7 +29,9 @@ services:
         aliases:
           - nexus
       smtp:
+<% scope['nexus::container_labels'].each do |label| -%>
     labels:
 <% scope['nexus::container_labels'].each do |label| -%>
       - "<%= label %>"
+<% end -%>
 <% end -%>
