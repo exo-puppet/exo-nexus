@@ -78,6 +78,7 @@ class nexus (
     require => [
       Class['docker::compose'],
       File["${nexus::install_dir}/docker-compose.yml"],
+      File["${nexus::install_dir}/conf/nexus.properties"],
     ],
   }
 
