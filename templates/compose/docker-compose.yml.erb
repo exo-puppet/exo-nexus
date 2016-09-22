@@ -18,6 +18,8 @@ services:
     image: <%= scope['nexus::image'] %>:<%= scope['nexus::version'] %>
     expose:
       - 8081
+    ports:  
+      - "<%= scope['nexus::smart_proxy_port'] %>:<%= scope['nexus::smart_proxy_port'] %>"
     environment:
       - MAX_HEAP=<%= scope['nexus::heap'] %>
     volumes:

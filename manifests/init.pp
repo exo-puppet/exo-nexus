@@ -11,6 +11,7 @@ class nexus (
   $container_labels   = [],
   $heap               = '2g',
   $smtp_network       = 'smtp',
+  $smart_proxy_port   = 21976,
 ) {
   ########################
   ## Directories
