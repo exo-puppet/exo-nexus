@@ -38,7 +38,8 @@ class nexus (
     ensure    => directory,
     owner     => "${account}",
     group     => "${account}",
-    mode      => '640',
+    # execution for all permission is needed for synchronization with maven central
+    mode      => '641',
   }
   file { "${nexus::log_dir}" :
     ensure    => directory,
