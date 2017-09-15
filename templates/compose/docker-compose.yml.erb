@@ -21,7 +21,8 @@ services:
     ports:  
       - "<%= scope['nexus::smart_proxy_port'] %>:<%= scope['nexus::smart_proxy_port'] %>"
     environment:
-      - MAX_HEAP=<%= scope['nexus::heap'] %>
+      CONTEXT_PATH: "/"
+      MAX_HEAP: <%= scope['nexus::heap'] %>
     volumes:
       - <%= scope['nexus::install_dir'] %>/conf/nexus.properties:/opt/nexus/conf/nexus.properties:ro
       - <%= scope['nexus::data_dir'] %>:/sonatype-work
