@@ -70,6 +70,7 @@ class nexus (
     group   => 'root',
     mode    => '0640',
     require => [File[$nexus::install_dir]],
+    notify  => [Docker_compose["${nexus::install_dir}/docker-compose.yml"]],
   }
 
   ###########################
