@@ -12,7 +12,7 @@ class nexus (
   $heap               = '2g',
   $smtp_network       = 'smtp',
   $smart_proxy_port   = 21976,
-  $java_options       = [ '-Djdk.tls.client.protocols=TLSv1,TLSv1.1,TLSv1.2' ],
+  $java_options       = [ '-Djava.security.properties=/etc/javatls.security' ],
 ) {
   ########################
   ## Directories
@@ -84,6 +84,17 @@ class nexus (
       File["${nexus::install_dir}/docker-compose.yml"],
       File["${nexus::install_dir}/conf/nexus.properties"],
     ],
+  }
+
+  # Hack legacy TLS version for crowd
+  file { "${nexus::install_dir}/javatls.security" :
+    ensure  => 'present',
+    source  => 'puppet:///modules/nexus/javatls.security',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    require => [File[$nexus::install_dir]],
+    notify  => [Docker_compose["${nexus::install_dir}/docker-compose.yml"]],
   }
 
   # TODO backup

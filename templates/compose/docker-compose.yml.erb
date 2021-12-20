@@ -28,6 +28,7 @@ services:
       - <%= scope['nexus::install_dir'] %>/conf/nexus.properties:/opt/nexus/conf/nexus.properties:ro
       - <%= scope['nexus::data_dir'] %>:/sonatype-work
       - <%= scope['nexus::log_dir'] %>:/sonatype-work/logs
+      - <%= scope['nexus::install_dir'] %>/javatls.security:/etc/javatls.security:ro
     networks:
       front:
         aliases:
