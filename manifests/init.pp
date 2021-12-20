@@ -12,6 +12,7 @@ class nexus (
   $heap               = '2g',
   $smtp_network       = 'smtp',
   $smart_proxy_port   = 21976,
+  $java_options       = [ '-Djdk.tls.client.protocols=TLSv1,TLSv1.1,TLSv1.2' ],
 ) {
   ########################
   ## Directories
