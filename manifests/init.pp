@@ -1,6 +1,6 @@
 class nexus (
   $image              = 'sonatype/nexus',
-  $version            = 'pro-2.14.21-02',
+  $version            = 'pro-2.15.0-04',
   $install_dir        = '/opt/nexus',
   $manage_install_dir = true,
   $data_dir           = '/srv/nexus',
