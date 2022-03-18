@@ -23,7 +23,6 @@ services:
     environment:
       CONTEXT_PATH: "/"
       MAX_HEAP: <%= scope['nexus::heap'] %>
-      JAVA_OPTS: <%= scope['nexus::java_options'].map{ |e| '"' + e + '"' }.join(' ') %>
     volumes:
       - <%= scope['nexus::install_dir'] %>/conf/nexus.properties:/opt/nexus/conf/nexus.properties:ro
       - <%= scope['nexus::data_dir'] %>:/sonatype-work

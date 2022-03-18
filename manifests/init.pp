@@ -12,7 +12,6 @@ class nexus (
   $heap               = '2g',
   $smtp_network       = 'smtp',
   $smart_proxy_port   = 21976,
-  $java_options       = [ '-Djava.security.properties=/etc/javatls.security' ],
 ) {
   ########################
   ## Directories
