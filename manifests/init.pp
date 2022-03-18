@@ -85,16 +85,5 @@ class nexus (
     ],
   }
 
-  # Hack legacy TLS version for crowd
-  file { "${nexus::install_dir}/javatls.security" :
-    ensure  => 'present',
-    source  => 'puppet:///modules/nexus/javatls.security',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0640',
-    require => [File[$nexus::install_dir]],
-    notify  => [Docker_compose["${nexus::install_dir}/docker-compose.yml"]],
-  }
-
   # TODO backup
 }
