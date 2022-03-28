@@ -53,8 +53,8 @@ class nexus (
   ########################
   file { "${nexus::install_dir}/conf/nexus.properties" :
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
+    owner   => $account,
+    group   => $account,
     mode    => '0644',
     content => template ('nexus/conf/nexus.properties.erb'),
     require => [File[$nexus::install_dir]],
