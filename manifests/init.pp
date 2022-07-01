@@ -9,7 +9,7 @@ class nexus (
   $front_network      = undef,
   $logo_path          = '',
   $container_labels   = [],
-  $heap               = '2g',
+  $heap               = '8g',
   $smtp_network       = 'smtp',
   $smart_proxy_port   = 21976,
 ) {
